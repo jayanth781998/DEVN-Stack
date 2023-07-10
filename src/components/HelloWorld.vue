@@ -53,7 +53,7 @@ const resu=ref("")
         </v-col>
 
       </v-row>
-      <br>
+      <br>  
       <h1 class="text-h4 font-weight-bold">{{ resu }}</h1>
       <v-row></v-row>
     </v-responsive>
