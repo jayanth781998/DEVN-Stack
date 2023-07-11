@@ -36,7 +36,7 @@ const resu=ref("")
     ></v-text-field>
       </div>
 
-      <v-row class="d-flex align-center justify-center">
+      <v-row class="d-flex flex-wrap align-center justify-center">
       
 
         <v-col cols="auto">
@@ -50,7 +50,18 @@ const resu=ref("")
 
             create  
           </v-btn>
+          
         </v-col>
+        <v-col cols="auto"><v-btn
+            color="primary"
+            to="List"
+            min-width="228"
+            size="x-large"
+            variant="flat"
+          >
+
+            View tables
+          </v-btn></v-col>
 
       </v-row>
       <br>  

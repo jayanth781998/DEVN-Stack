@@ -4,13 +4,17 @@ const ddb = new aws.DynamoDB({
   region:"us-east-1"
   // configuration variables
 })
-
-
+const lst=async(req,res)=>{
+   await ddb.listTables((err,data)=>{
+      res.send(data)
+   })
+}
 const all=async(req,res)=>{
     const {tname}=req.params
     const params={
        TableName:tname,
     }
+    
     await ddb.scan(params,(err,data)=>{//fetching all data in table
        if(!err){
           res.send(data.Items)
@@ -37,4 +41,13 @@ const all=async(req,res)=>{
   else{res.send("fail"+err)}
   })
  }
- module.exports={all,query}
+ const desc=async(req,res)=>{
+   const tname=req.params.tname
+   const params={TableName:tname,
+   }
+   await ddb.describeTable(params,(err,data)=>{
+      if(!err){res.send(data)} 
+  else{res.send("fail"+err)}
+   })
+ }
+ module.exports={all,query,lst,desc}

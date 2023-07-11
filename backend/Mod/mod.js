@@ -57,7 +57,7 @@ const update=async(req,res)=>{
   const {tname}=req.params
   let arr={}
   for (const i in req.body){
-    arr[i]={ S:req.body[i] }
+    arr[i]=req.body[i] 
 }
   var params = {
      TableName: tname,
@@ -68,4 +68,20 @@ const update=async(req,res)=>{
   else{res.send("fail"+err)}
  })
 }
-module.exports={create,insert}
+const del= async(req,res)=>{
+  const {tname}=req.params
+  let arr={}
+  for (const i in req.body){
+    arr[i]={ S:req.body[i] }
+}
+  const params={
+     TableName:tname,
+     Key: arr
+  }
+  console.log(params);
+  await ddb.deleteItem(params,(err)=>{//deleting specific data
+     if(!err){res.send(`deleted`)} 
+  else{res.send("fail"+err)}
+  })
+}   
+module.exports={create,insert,del}
