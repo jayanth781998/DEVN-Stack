@@ -55,3 +55,19 @@ pnpm lint
 ### Customize configuration
 
 See [Configuration Reference](https://vitejs.dev/config/).
+
+to start dynamo db server
+
+java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb 
+
+to check tables
+
+aws dynamodb describe-table --table-name student2 --endpoint-url http://localhost:8000
+
+to run the api
+
+nodemon api
+
+to run frontend
+
+npm run dev
