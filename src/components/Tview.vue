@@ -8,7 +8,6 @@ const result=ref([])
 const result2=ref("")
 const result3=ref("")
 const objects=[]
-const Cols=[]
 const x=ref([])
 const payload=ref({})
 const key=ref(true)
