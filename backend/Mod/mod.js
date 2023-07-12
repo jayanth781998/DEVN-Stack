@@ -55,15 +55,9 @@ const insert=async(req,res)=>{
 
 const update=async(req,res)=>{
   const {tname}=req.params
-  let arr={}
-  for (const i in req.body){
-    arr[i]=req.body[i] 
-}
-  var params = {
-     TableName: tname,
-     Item: arr
- };
- await ddb.putItem(params,(err)=>{
+console.log(req.body)
+  var params = req.body
+ await ddb.updateItem(params,(err)=>{
   if(!err){res.send(`success `)} 
   else{res.send("fail"+err)}
  })
@@ -84,4 +78,4 @@ const del= async(req,res)=>{
   else{res.send("fail"+err)}
   })
 }   
-module.exports={create,insert,del}
+module.exports={create,insert,del,update}

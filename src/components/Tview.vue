@@ -10,7 +10,11 @@ const result3=ref("")
 const objects=[]
 const x=ref([])
 const payload=ref({})
+const keys=ref({})
 const key=ref(true)
+const payloadup=ref({})
+const ex=ref("")
+const ux=ref("")
 const des=async()=>{
     await axios.get(`http://localhost:5000/view/des/${resu.params.tname}`).then((res)=>{
         result3.value=res.data.Table.KeySchema
@@ -32,8 +36,7 @@ des()
             objects.push(result.value[i])
         }
         console.log(objects)
-
-    }
+      }
     ).catch((err)=>{console.log(err);})
   }
   list()
@@ -52,6 +55,36 @@ des()
     }).catch((err)=>{console.log(err);
     result2.value="failed to delete"})
   }
+  const updater=async(z)=>{
+    console.log(z);
+    for(const i of x.value){
+        if (i in z ==true){
+        keys.value[i]=z[i]}
+    }
+    for(const j of Object.keys(z)){
+      if(j in keys.value== false){
+        ex.value=j
+        ux.value=z[j]
+      }
+    }
+  console.log(keys.value);
+  payloadup.value={
+     TableName: resu.params.tname,
+     Key: keys.value,
+  UpdateExpression: `set ${ex.value} = :x`,
+  ExpressionAttributeValues: {
+      ":x": ux.value
+  }
+ }
+ console.log(payloadup.value);
+  await axios.post(`http://localhost:5000/update/${resu.params.tname}`,payloadup.value).then((res)=>{
+        console.log(res.data)
+        result2.value="success"
+        list()
+
+    }).catch((err)=>{console.log(err);
+    result2.value="failed to delete"})
+}
 </script>
 <template>
   <v-responsive class="fill-height d-flex flex-row flex-wrap align-center text-center fill-height">
@@ -60,7 +93,7 @@ des()
       <br>
       <v-row class="d-flex flex-row align-center justify-center" v-for="ob in result">
         <v-col class="border" cols="10">
-      <TT :cols="ob" :key="key" @del="deleter"></TT>
+      <TT :cols="ob" :key="key" @del="deleter" @update="updater"></TT>
     </v-col>
 </v-row>
 
