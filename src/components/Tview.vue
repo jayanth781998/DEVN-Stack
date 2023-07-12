@@ -92,7 +92,7 @@ des()
       <div class=" text-body-4 font-weight-light mb-n1">{{ resu.params.tname }} table</div>
       <br>
       <v-row class="d-flex flex-row align-center justify-center" v-for="ob in result">
-        <v-col class="border" cols="10">
+        <v-col class="d-flex flex-wrap border align-center justify-center" cols="10">
       <TT :cols="ob" :key="key" @del="deleter" @update="updater"></TT>
     </v-col>
 </v-row>
