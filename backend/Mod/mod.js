@@ -7,15 +7,17 @@ const ddb = new aws.DynamoDB({
 
 const create = async (req, res) => {
   const { tname } = req.params;
-  const { key } = req.body;
+  //const { key } = req.body;
   let arr = [];
+  let key = [];
   for (const i in req.body) {
-    arr.push({ AttributeName: req.body[i], AttributeType: "S" });
+    arr.push({ AttributeName: req.body[i].key, AttributeType: "S" });
+    key.push({ AttributeName: req.body[i].key, KeyType: req.body[i].keyT})
   }
   console.log(arr);
   const params = {
     TableName: tname,
-    KeySchema: [{ AttributeName: key, KeyType: "HASH" }],
+    KeySchema: key,
     AttributeDefinitions: arr,
     ProvisionedThroughput: {
       ReadCapacityUnits: 10,
