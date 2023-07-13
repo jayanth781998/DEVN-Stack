@@ -12,7 +12,7 @@ const create = async (req, res) => {
   let key = [];
   for (const i in req.body) {
     arr.push({ AttributeName: req.body[i].key, AttributeType: "S" });
-    key.push({ AttributeName: req.body[i].key, KeyType: req.body[i].keyT})
+    key.push({ AttributeName: req.body[i].key, KeyType: req.body[i].keyT });
   }
   console.log(arr);
   const params = {
@@ -87,4 +87,15 @@ const del = async (req, res) => {
     }
   });
 };
+const dele=async (req,res)=>{
+  const {tname}=rq.params
+  const params={
+    TableName:tname
+  }
+  await ddb.deleteTable(params,(err,data)=>{
+    if(!err){res.send(`successfully deleted ${tname}`)}
+    else{res.send("failed")}
+  })
+
+}
 module.exports = { create, insert, del, update };

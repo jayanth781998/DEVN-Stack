@@ -5,23 +5,21 @@ const inp = ref("");
 const inp2 = ref("");
 const resu = ref("");
 const comp = ref(false);
-const add=ref("+")
+const add = ref("+");
 const inpv = ref("");
 const mod = () => {
-  comp.value=!comp.value
-  if(add.value=="+")
-  {
-  add.value="-"}
-  else{
-    add.value="+"
-    inpv.value=""
+  comp.value = !comp.value;
+  if (add.value == "+") {
+    add.value = "-";
+  } else {
+    add.value = "+";
+    inpv.value = "";
   }
-  
 };
 const create = async () => {
-  let payload = { PK: {key :inp2.value, keyT:"HASH" }};
-  if(inpv.value !== ""){
-    payload.CK={key:inpv.value,keyT:"range"}
+  let payload = { PK: { key: inp2.value, keyT: "HASH" } };
+  if (inpv.value !== "") {
+    payload.CK = { key: inpv.value, keyT: "range" };
   }
   console.log(payload);
   await axios
@@ -47,11 +45,13 @@ const create = async () => {
       <h1 class="text-h2 font-weight-bold">DB Managers</h1>
 
       <div class="py-14">
-        <v-col  cols="12">
-        <v-text-field v-model="inp" label="table name"></v-text-field>
-        <v-text-field v-model="inp2" label="Key attribute name"></v-text-field></v-col>
-        <v-col  cols="12">
-          <v-text-field v-if="comp"
+        <v-col cols="12">
+          <v-text-field v-model="inp" label="table name"></v-text-field>
+          <v-text-field v-model="inp2" label="Key attribute name"></v-text-field
+        ></v-col>
+        <v-col cols="12">
+          <v-text-field
+            v-if="comp"
             v-model="inpv"
             label="Composite Attribute Name"
           ></v-text-field
@@ -63,7 +63,7 @@ const create = async () => {
           size="x-large"
           variant="flat"
         >
-        {{ add }}
+          {{ add }}
         </v-btn>
       </div>
 
