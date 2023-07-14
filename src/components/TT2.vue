@@ -38,24 +38,24 @@ const sett = (e, x) => {
 };
 </script>
 <template>
-  <v-table class="try" >
-    <thead class="border fill-width">
-      <th class="pa-2" v-for="v in Object.keys(cols)">{{ v }}</th>
+  <v-card >
+    <thead class="border fill-width" v-for="(keys,values) in cols">
+      <th class="pa-2">{{ keys }}</th>
+      <td>
+          <input
+            class="border "
+            v-if="edit"
+            type="text"
+            :value="cols[values].S"
+            @input="sett($event.target.value, values)"
+          />
+          <span v-else>{{ cols[values].S }}</span>
+        </td>
 
     </thead>
     <tbody>
       <tr class="border">
-        <td v-for="x in Object.keys(cols)">
-          <input
-            class="border"
-            v-if="edit"
-            type="text"
-            :value="cols[x].S"
-            @input="sett($event.target.value, x)"
-            
-          />
-          <span v-else>{{ cols[x].S }}</span>
-        </td>
+        
         <td>
           <v-btn
           variant="text"
@@ -70,17 +70,8 @@ const sett = (e, x) => {
         </td>
       </tr>
     </tbody>
-  </v-table>
+  </v-card>
   <br />
 </template>
 
-<style lang="scss" scoped>
-.try{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-align-items: center;}
-td,th{
-  text-align: center;
-}
-</style>
+<style lang="scss" scoped></style>

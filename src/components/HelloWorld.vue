@@ -61,7 +61,7 @@ const create = async () => {
           @click="mod"
           min-width="228"
           size="x-large"
-          variant="flat"
+          variant="outlined"
         >
           {{ add }}
         </v-btn>
@@ -97,3 +97,8 @@ const create = async () => {
     </v-responsive>
   </v-container>
 </template>
+<style>
+v-container{
+  background-color: black;
+}
+</style>

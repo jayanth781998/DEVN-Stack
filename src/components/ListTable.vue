@@ -34,7 +34,7 @@ list();
             :to="{ name: 'Table', params: { tname: key } }"
             min-width="228"
             size="x-large"
-            variant="flat"
+            variant="outlined"
           >
             {{ key }}
           </v-btn></v-col

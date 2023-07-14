@@ -118,9 +118,8 @@ const updater = async (z) => {
       v-for="ob in result"
     >
       <v-col
-        class="d-flex flex-wrap border align-center justify-center"
-        cols="10"
-      >
+        class="d-flex flex-row flex-wrap align-center jsutify-center border pa-0"
+        cols="10">
         <TT :cols="ob" :key="key" @del="deleter" @update="updater"></TT>
       </v-col>
     </v-row>
